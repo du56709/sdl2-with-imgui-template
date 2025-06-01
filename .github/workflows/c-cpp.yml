@@ -1,0 +1,20 @@
+name: C/C++ CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Refresh apt repositories
+      run: sudo apt-get update -y
+    - name: make
+      run: make -j 2
+

@@ -44,8 +44,13 @@ class ExportSomeData(Operator, ExportHelper):
             
             for f in obj.data.polygons:
                 face_verts = []
-                face_material = obj.material_slots[f.material_index].name
                 
+                if f.material_index > 0:
+                    face_material = obj.material_slots[f.material_index].name
+                else:
+                    # No material, make up a name
+                    face_material = "none" 
+                    
                 # Convert from Z up to Y up
                 for v_index in f.vertices:
                     face_verts.append(

@@ -46,8 +46,13 @@ class ExportSomeData(Operator, ExportHelper):
                 face_verts = []
                 face_material = obj.material_slots[f.material_index].name
                 
+                # Convert from Z up to Y up
                 for v_index in f.vertices:
-                    face_verts.append([obj.data.vertices[v_index].co.x, obj.data.vertices[v_index].co.y, obj.data.vertices[v_index].co.z])
+                    face_verts.append(
+                        [obj.data.vertices[v_index].co.x,
+                         obj.data.vertices[v_index].co.z, 
+                         -obj.data.vertices[v_index].co.y]
+                    )
                 exportable_polys.append({
                     "material": face_material,
                     "poly": face_verts
